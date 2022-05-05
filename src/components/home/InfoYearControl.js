@@ -38,7 +38,7 @@ const InfoSectionYearControl = () => {
             refreshMap();
           }}
         >
-          <option value="All">2014 to 2020</option>
+          <option value="All">2014 to Current</option>
           <option value="2014">2014</option>
           <option value="2015">2015</option>
           <option value="2016">2016</option>
@@ -46,6 +46,8 @@ const InfoSectionYearControl = () => {
           <option value="2018">2018</option>
           <option value="2019">2019</option>
           <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
         </select>
       </div>
     </>

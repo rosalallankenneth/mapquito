@@ -3,7 +3,7 @@ import React, { useState, createContext } from "react";
 export const TableContext = createContext();
 
 export const TableProvider = props => {
-  const [addModalData, setAddModalData] = useState({
+  const initModalData = {
     Region: "10",
     Province: "MISAMIS OCCIDENTAL",
     Muncity: "",
@@ -36,13 +36,19 @@ export const TableProvider = props => {
     Barangay: "",
     Lat: 8.143329652254984,
     Lng: 123.84247183799745
-  });
+  };
+  const [addModalData, setAddModalData] = useState(initModalData);
+
+  const resetModalData = () => {
+    setAddModalData(initModalData);
+  };
 
   return (
     <TableContext.Provider
       value={{
         addModalData,
-        setAddModalData
+        setAddModalData,
+        resetModalData
       }}
     >
       {props.children}

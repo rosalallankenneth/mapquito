@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect, useCallback } from "react";
 import "leaflet/dist/leaflet.css";
+import "react-leaflet-markercluster/dist/styles.min.css";
 import {
   MapContainer,
   TileLayer,
@@ -12,6 +13,7 @@ import { getCases, getRanges } from "../../utils/MapUtils";
 import { MapContext } from "../../context/MapContext";
 import { MapFilterContext } from "../../context/MapFilterContext";
 import { GlobalContext } from "../../context/GlobalContext";
+import ClusteredMarkers from "./ClusteredMarkers.js";
 
 const Map = () => {
   const {
@@ -128,7 +130,7 @@ const Map = () => {
       <MapContainer
         key={mapKey}
         center={centerLoc}
-        zoom={10}
+        zoom={11}
         className="w-full h-full z-0"
         minZoom={9}
         zoomControl={false}
@@ -147,26 +149,30 @@ const Map = () => {
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         /> */}
+        {parseInt(year) !== 2022 ? (
+          dataGeoJson.features.map(geoJson => {
+            return (
+              <GeoJSON
+                key={geoJson.properties.ADM3_EN}
+                style={{
+                  fillColor: "#F52828",
+                  color:
+                    layerSelected === geoJson.properties.ADM3_EN
+                      ? "#fab719"
+                      : "#CCC",
+                  weight: layerSelected === geoJson.properties.ADM3_EN ? 3 : 1
+                }}
+                data={geoJson}
+                onEachFeature={onEachLayer}
+              >
+                <Tooltip>{geoJson.properties.ADM3_EN}</Tooltip>
+              </GeoJSON>
+            );
+          })
+        ) : (
+          <ClusteredMarkers />
+        )}
         <ZoomControl position="bottomright" />
-        {dataGeoJson.features.map(geoJson => {
-          return (
-            <GeoJSON
-              key={geoJson.properties.ADM3_EN}
-              style={{
-                fillColor: "#F52828",
-                color:
-                  layerSelected === geoJson.properties.ADM3_EN
-                    ? "#fab719"
-                    : "#CCC",
-                weight: layerSelected === geoJson.properties.ADM3_EN ? 3 : 1
-              }}
-              data={geoJson}
-              onEachFeature={onEachLayer}
-            >
-              <Tooltip>{geoJson.properties.ADM3_EN}</Tooltip>
-            </GeoJSON>
-          );
-        })}
       </MapContainer>
     </>
   );

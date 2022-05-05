@@ -7,11 +7,15 @@ import ModalDetailsMenu from "./ModalFormMenu";
 import { TableContext } from "../../../context/TableContext";
 import { reviewData } from "../../../utils/TableUtils";
 import { createCaseDB } from "../../../utils/GlobalUtils";
+import { GlobalContext } from "../../../context/GlobalContext";
 
 const ModalForm = props => {
   const { open, handleClose } = props;
+  const { refreshDbData } = useContext(GlobalContext);
+  const { addModalData, setAddModalData, resetModalData } = useContext(
+    TableContext
+  );
   const [activePage, setActivePage] = useState(0);
-  const { addModalData, setAddModalData } = useContext(TableContext);
   const [error, setError] = useState(false);
 
   const handleMenuClick = pageNum => {
@@ -23,13 +27,15 @@ const ModalForm = props => {
     if (validate) {
       let msg = "Please fill in the following missing fields:\r\n";
       validate.forEach(i => (msg += i + "\r\n"));
-
       alert(msg);
     } else {
       let msg =
         "Make sure to review all the information before submitting. Confirm submission of new record?";
       if (window.confirm(msg)) {
         createCaseDB(addModalData, setError);
+        refreshDbData();
+        resetModalData();
+        handleClose();
         console.log(error);
       }
     }

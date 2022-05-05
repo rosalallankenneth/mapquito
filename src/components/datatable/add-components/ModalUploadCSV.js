@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import UploadArea from "./UploadArea";
 import FileActions from "./FileActions";
 import { createCaseDB } from "../../../utils/GlobalUtils";
+import { GlobalContext } from "../../../context/GlobalContext";
 
-const saveRecords = (csvData, dataAttr, setCreateError) => {
+const saveRecords = (csvData, dataAttr, setCreateError, refreshDbData) => {
   csvData.forEach(d => {
     if (d.length === dataAttr.length) {
       const item = {};
@@ -22,10 +23,12 @@ const saveRecords = (csvData, dataAttr, setCreateError) => {
       createCaseDB({ ...item, Lat: 0, Lng: 0 }, setCreateError);
     }
   });
+  refreshDbData();
 };
 
 const ModalUploadCSV = props => {
   const { uploadModalOpen, handleUploadClose } = props;
+  const { refreshDbData } = useContext(GlobalContext);
   const [csvResults, setCsvResults] = useState(null);
   const [createError, setCreateError] = useState(false);
   const handleSaveBtn = () => {
@@ -33,7 +36,8 @@ const ModalUploadCSV = props => {
       saveRecords(
         [...csvResults.data].splice(1, csvResults.data.length - 1),
         csvResults.data[0],
-        setCreateError
+        setCreateError,
+        refreshDbData
       );
 
       if (createError) {

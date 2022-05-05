@@ -18,12 +18,17 @@ export const GlobalProvider = props => {
     }
   }
 
+  const refreshDbData = () => {
+    getCasesDB(setDbData);
+  };
+
   return (
     dbData && (
       <GlobalContext.Provider
         value={{
           dengueData: dengueData.data.concat(dbData.data),
-          listMuncities: Object.keys(listMuncities).sort()
+          listMuncities: Object.keys(listMuncities).sort(),
+          refreshDbData
         }}
       >
         {props.children}

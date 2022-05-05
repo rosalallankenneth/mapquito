@@ -90,10 +90,11 @@ export const getCases = (dengueData, year, filters) => {
         casesCount[el.Muncity] = 1;
       }
 
+      const yearAdmit = new Date(el.DAdmit);
       // get data for latest year
-      if (casesPrevious[el.Muncity] && el.Year === todayYear) {
+      if (casesPrevious[el.Muncity] && yearAdmit.getFullYear() === todayYear) {
         casesPrevious[el.Muncity] += 1;
-      } else if (el.Year === todayYear) {
+      } else if (yearAdmit.getFullYear() === todayYear) {
         casesPrevious[el.Muncity] = 1;
       }
 
@@ -102,12 +103,20 @@ export const getCases = (dengueData, year, filters) => {
       getAgeGroupCases(casesAgeGroup, el, ageGroupName);
     }
   } else {
-    const yearData = filteredData.filter(
-      d => d.Year === year || parseInt(d.Year) === parseInt(year) - 1
-    );
+    const yearData = filteredData.filter(d => {
+      const yearAdmit = new Date(d.DAdmit);
+
+      return (
+        yearAdmit.getFullYear() === parseInt(year) ||
+        // parseInt(yearAdmit.getFullYear()) === parseInt(year) - 1
+        yearAdmit.getFullYear() === parseInt(year) - 1
+      );
+    });
     for (const el of yearData) {
+      const yearAdmit = new Date(el.DAdmit);
+
       // count occurences of cases for muncities on specific year
-      if (el.Year === year)
+      if (yearAdmit.getFullYear() === parseInt(year))
         if (casesCount[el.Muncity]) {
           casesCount[el.Muncity] += 1;
         } else {
@@ -124,7 +133,7 @@ export const getCases = (dengueData, year, filters) => {
 
       // get data for age group cases
       const ageGroupName = getAgeGroup(el.AgeYears);
-      if (el.Year === year) {
+      if (yearAdmit.getFullYear() === parseInt(year)) {
         getAgeGroupCases(casesAgeGroup, el, ageGroupName);
       }
     }
@@ -132,15 +141,3 @@ export const getCases = (dengueData, year, filters) => {
 
   return { casesCount, casesPrevious, casesAgeGroup };
 };
-
-// const filteredMuncityCases = filterAgeData(
-//   muncityCases,
-//   casesAgeGroup[muncityName.toUpperCase()],
-//   {
-//     ageCheckChildren,
-//     ageCheckYouth,
-//     ageCheckAdults,
-//     ageCheckSeniors
-//   }
-// );
-// console.log(filteredMuncityCases);
