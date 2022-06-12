@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ModalDetailsPatientInfo from "./ModalDetailsPatientInfo";
 import ModalDetailsCaseInfo from "./ModalDetailsCaseInfo";
 import ModalDetailsDRU from "./ModalDetailsDRU";
-import ModalDetailsOtherInfo from "./ModalDetailsOtherInfo";
 import ModalDetailsMenu from "./ModalDetailsMenu";
 
 const ModalDetails = props => {
@@ -25,13 +24,22 @@ const ModalDetails = props => {
       >
         <div className="flex flex-col justify-start items-start bg-white w-full space-y-5">
           <div className="flex justify-between items-center space-x-3 w-full">
-            <h4 className="flex-1 md:text-md text-sm font-bold bg-gray-100 p-3 rounded-md drop-shadow-md">
-              <span className="text-gray-900">EPID: </span>
-              <span className="text-green-700 truncate overflow-hidden text-ellipsis">
-                {selectedData.EPIID}
-                {/* A3D000804D914BE199E60AB14B4A027E */}
-              </span>
-            </h4>
+            <div className="flex-1 flex justify-start items-center space-x-3 text-xl font-bold">
+              <svg
+                className="h-8 w-8 text-gray-900"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                />
+              </svg>
+              <span className="text-green-700">Case Details</span>
+            </div>
             <button
               onClick={() => {
                 handleClose();
@@ -71,9 +79,6 @@ const ModalDetails = props => {
             )}
             {activePage === 2 && (
               <ModalDetailsDRU selectedData={selectedData} />
-            )}
-            {activePage === 3 && (
-              <ModalDetailsOtherInfo selectedData={selectedData} />
             )}
           </div>
         </div>

@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import MapLocation from "../map/MapLocation";
 import { TableContext } from "../../../context/TableContext";
+import {
+  getBirthdateConvert,
+  getCurrentDate
+} from "../../../utils/GlobalUtils";
 
 const ModalDetailsPatientInfo = ({ open }) => {
   const { addModalData, setAddModalData } = useContext(TableContext);
+  const [birthdate, setBirthdate] = useState("");
 
   return (
     <>
@@ -12,15 +17,38 @@ const ModalDetailsPatientInfo = ({ open }) => {
           <label className="text-lg border-l-4 border-green-500 pl-3 font-bold">
             Personal Information
           </label>
+          <div className="flex sm:flex-row flex-col">
+            <div className="flex flex-1 flex-col justify-start items-start space-y-3">
+              <label className="text-sm">Birthdate:</label>
+              <input
+                type="date"
+                value={birthdate}
+                onChange={e => {
+                  const age = getBirthdateConvert(
+                    getCurrentDate(),
+                    e.target.value
+                  );
+
+                  setBirthdate(e.target.value);
+                  setAddModalData({
+                    ...addModalData,
+                    AgeYears: age.ageYears,
+                    AgeMons: age.ageMons,
+                    AgeDays: age.ageDays
+                  });
+                }}
+                className="p-3 rounded-lg w-full border-2 border-gray-300"
+              />
+            </div>
+          </div>
+
           <div className="flex sm:flex-row flex-col sm:space-x-3 space-x-0 sm:space-y-0 space-y-3">
             <div className="flex flex-1 flex-col justify-start items-start space-y-3">
               <label className="text-sm">Age in Years:</label>
               <input
                 type="number"
                 value={addModalData.AgeYears}
-                onChange={e =>
-                  setAddModalData({ ...addModalData, AgeYears: e.target.value })
-                }
+                disabled
                 className="p-3 rounded-lg w-full border-2 border-gray-300"
               />
             </div>
@@ -29,12 +57,7 @@ const ModalDetailsPatientInfo = ({ open }) => {
               <input
                 type="number"
                 value={addModalData.AgeMons}
-                onChange={e =>
-                  setAddModalData({
-                    ...addModalData,
-                    AgeMons: e.target.value
-                  })
-                }
+                disabled
                 className="p-3 rounded-lg w-full border-2 border-gray-300"
               />
             </div>
@@ -43,9 +66,7 @@ const ModalDetailsPatientInfo = ({ open }) => {
               <input
                 type="number"
                 value={addModalData.AgeDays}
-                onChange={e =>
-                  setAddModalData({ ...addModalData, AgeDays: e.target.value })
-                }
+                disabled
                 className="p-3 rounded-lg w-full border-2 border-gray-300"
               />
             </div>
@@ -133,16 +154,38 @@ const ModalDetailsPatientInfo = ({ open }) => {
                 }
               />
             </div>
+
             <div className="flex flex-col space-y-3">
               <label className="text-sm">City/Municipality:</label>
-              <input
+              <select
                 className="p-3 rounded-lg w-full border-2 border-gray-300"
                 value={addModalData.Muncity}
                 onChange={e =>
                   setAddModalData({ ...addModalData, Muncity: e.target.value })
                 }
-              />
+              >
+                <option value="ALORAN">ALORAN</option>
+                <option value="BALIANGAO">BALIANGAO</option>
+                <option value="BONIFACIO">BONIFACIO</option>
+                <option value="CALAMBA">CALAMBA</option>
+                <option value="CLARIN">CLARIN</option>
+                <option value="CONCEPCION">CONCEPCION</option>
+                <option value="DON VICTORIANO CHIONGBIAN">
+                  DON VICTORIANO CHIONGBIAN
+                </option>
+                <option value="JIMENEZ">JIMENEZ</option>
+                <option value="LOPEZ JAENA">LOPEZ JAENA</option>
+                <option value="OROQUIETA CITY">OROQUIETA CITY</option>
+                <option value="OZAMIZ CITY">OZAMIZ CITY</option>
+                <option value="PANAON">PANAON</option>
+                <option value="PLARIDEL">PLARIDEL</option>
+                <option value="SAPANG DALAGA">SAPANG DALAGA</option>
+                <option value="SINACABAN">SINACABAN</option>
+                <option value="TANGUB CITY">TANGUB CITY</option>
+                <option value="TUDELA">TUDELA</option>
+              </select>
             </div>
+
             <div className="flex flex-col space-y-3">
               <label className="text-sm">District:</label>
               <input
