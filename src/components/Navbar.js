@@ -34,7 +34,7 @@ export const NavbarMain = () => {
           to="/graphs"
           className="px-5 py-2 hover:bg-gray-800 bg-transparent rounded"
         >
-          Graphs
+          Forecasting
         </Link>
         <Link
           to="/datatable"
@@ -113,7 +113,7 @@ export const NavbarMobile = () => {
           to="/graphs"
           className="px-5 py-2 bg-gray-800 hover:bg-gray-700 rounded"
         >
-          Graphs
+          Forecasting
         </Link>
         <Link
           to="/datatable"
