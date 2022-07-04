@@ -1,3 +1,5 @@
+// import ARIMA from "arima";
+
 export const getYears = () => {
   const caseObject = {};
   const d = new Date();
@@ -73,3 +75,23 @@ export const getMonthlyCases = (muncity, year, dengueData) => {
 
   return monthlyCases;
 };
+
+// export const forecastCases = () => {
+//   // Synthesize timeseries
+//   const ts = Array(24)
+//     .fill(0)
+//     .map((_, i) => i + Math.random() / 5);
+
+//   // Init arima and start training
+//   const arima = new ARIMA({
+//     p: 2,
+//     d: 1,
+//     q: 2,
+//     verbose: false
+//   }).train(ts);
+
+//   // Predict next 12 values
+//   const [pred, errors] = arima.predict(12);
+
+//   return { pred, errors };
+// };
