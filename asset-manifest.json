@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mapquito-v1/static/css/main.66ea4908.css",
-    "main.js": "/mapquito-v1/static/js/main.34e961ea.js",
-    "static/js/787.d240ee47.chunk.js": "/mapquito-v1/static/js/787.d240ee47.chunk.js",
-    "index.html": "/mapquito-v1/index.html",
-    "main.66ea4908.css.map": "/mapquito-v1/static/css/main.66ea4908.css.map",
-    "main.34e961ea.js.map": "/mapquito-v1/static/js/main.34e961ea.js.map",
-    "787.d240ee47.chunk.js.map": "/mapquito-v1/static/js/787.d240ee47.chunk.js.map"
+    "main.css": "/mapquito/static/css/main.66ea4908.css",
+    "main.js": "/mapquito/static/js/main.39bfb812.js",
+    "static/js/787.d240ee47.chunk.js": "/mapquito/static/js/787.d240ee47.chunk.js",
+    "index.html": "/mapquito/index.html",
+    "main.66ea4908.css.map": "/mapquito/static/css/main.66ea4908.css.map",
+    "main.39bfb812.js.map": "/mapquito/static/js/main.39bfb812.js.map",
+    "787.d240ee47.chunk.js.map": "/mapquito/static/js/787.d240ee47.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.66ea4908.css",
-    "static/js/main.34e961ea.js"
+    "static/js/main.39bfb812.js"
   ]
 }
