@@ -78,7 +78,7 @@ export const formatDate = rawDate => {
     }
   );
 };
-0;
+
 export const getCurrentDate = () => {
   return new Date().toLocaleDateString(
     {},
