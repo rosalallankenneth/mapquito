@@ -1,7 +1,6 @@
 import axios from "axios";
 
 // const ENDPOINT_PROD = "http://localhost/dengue-monitor";
-// const ENDPOINT_PROD = "http://mapquito.byethost14.com";
 const ENDPOINT_PROD = "https://dengue-monitor.000webhostapp.com";
 
 export const getCasesDB = setCases => {
@@ -79,7 +78,7 @@ export const formatDate = rawDate => {
     }
   );
 };
-0
+0;
 export const getCurrentDate = () => {
   return new Date().toLocaleDateString(
     {},
