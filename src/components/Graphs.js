@@ -16,6 +16,16 @@ const Graphs = () => {
       <MapProvider>
         <div className="flex flex-col bg-gray-100 min-h-screen w-full">
           <Navbar />
+
+          <div className="flex md:flex-row flex-col md:space-x-3 space-x-0 md:space-y-0 space-y-3 justify-center items-center p-3">
+            <div className="bg-white rounded-lg md:w-1/2 w-full p-3 drop-shadow-md">
+              <AnnualTrendChart />
+            </div>
+            <div className="bg-white rounded-lg md:w-1/2 w-full p-3 drop-shadow-md">
+              <AnnualTrendChartMuncity />
+            </div>
+          </div>
+
           <div
             className="flex flex-col h-screen w-full"
             // style={{ height: "calc(100% - 64px)" }}
@@ -32,14 +42,6 @@ const Graphs = () => {
             </div>
           </div>
 
-          <div className="flex md:flex-row flex-col md:space-x-3 space-x-0 md:space-y-0 space-y-3 justify-center items-center p-3">
-            <div className="bg-white rounded-lg md:w-1/2 w-full p-3 drop-shadow-md">
-              <AnnualTrendChart />
-            </div>
-            <div className="bg-white rounded-lg md:w-1/2 w-full p-3 drop-shadow-md">
-              <AnnualTrendChartMuncity />
-            </div>
-          </div>
         </div>
       </MapProvider>
     </>
