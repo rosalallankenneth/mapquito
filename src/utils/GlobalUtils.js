@@ -1,10 +1,10 @@
 import axios from "axios";
 
 // const ENDPOINT_PROD = "http://localhost/dengue-monitor";
-const ENDPOINT_PROD = "https://dengue-monitor.000webhostapp.com";
+const ENDPOINT_PROD = "https://aklrosal-apis.herokuapp.com";
 
 export const getCasesDB = setCases => {
-  // fetch(ENDPOINT_PROD + "/api/retrieve.php")
+  // fetch(ENDPOINT_PROD + "/retrieve.php")
   //   .then(response => response.json())
   //   .then(data => setCases(data))
   //   .catch(error => {
@@ -14,7 +14,7 @@ export const getCasesDB = setCases => {
   //   });
 
   axios
-    .get(ENDPOINT_PROD + "/api/retrieve.php")
+    .get(ENDPOINT_PROD + "/retrieve.php")
     .then(response => {
       // handle success
       setCases(response.data);
@@ -37,7 +37,7 @@ export const createCaseDB = (data, setError) => {
   payload = payload.trim("&");
 
   // fetch(
-  //   ENDPOINT_PROD + "/api/create1.php?" + payload
+  //   ENDPOINT_PROD + "/create1.php?" + payload
   //   // , {
   //   //   headers: {
   //   //     Accept: "application/json",
@@ -57,7 +57,7 @@ export const createCaseDB = (data, setError) => {
   //   });
 
   axios
-    .get(ENDPOINT_PROD + "/api/create1.php?" + payload)
+    .get(ENDPOINT_PROD + "/create.php?" + payload)
     .then(function(response) {
       setError(false);
     })
